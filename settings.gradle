@@ -1,0 +1,6 @@
+rootProject.name = 'Travanleo'
+include 'comment-service'
+include 'user-service'
+include 'auth-service'
+include 'core'
+
