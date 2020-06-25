@@ -8,14 +8,15 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class,
-		DataSourceTransactionManagerAutoConfiguration.class,
-		FlywayAutoConfiguration.class })
+        HibernateJpaAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class,
+        FlywayAutoConfiguration.class })
+@Import({WebXmlConfiguration.class})
+@ImportResource({ "classpath*:META-INF/spring/appContext.xml" })
 public abstract class AbstractApplicationConfiguration {
 
 }
