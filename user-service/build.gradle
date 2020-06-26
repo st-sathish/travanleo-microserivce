@@ -5,17 +5,11 @@ buildscript {
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
     }
-
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.6.RELEASE'
-    }
 }
 
 plugins {
     id 'java'
 }
-
-apply plugin: 'spring-boot'
 
 group 'com.travanleo'
 version '1.0-SNAPSHOT'
@@ -35,7 +29,6 @@ project.ext.mysqlPassword='mysql'
 import groovy.sql.Sql
 
 configurations {
-    providedRuntime // needed for Spring Boot executable WAR
     providedCompile
     compile() {
         exclude module: 'activation'
