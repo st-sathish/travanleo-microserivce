@@ -8,6 +8,10 @@ import com.travanleo.user.api.commands.domain.CommandWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Use this service in all *ApiResource java class to perform write operation.
+ * This will log all the commands performed by the user
+ */
 @Service
 public class CommandSourceWritePlatformServiceImpl implements CommandSourceWritePlatformService {
 
@@ -19,11 +23,13 @@ public class CommandSourceWritePlatformServiceImpl implements CommandSourceWrite
     }
 
     @Override
-    public CommandProcessingResult logCommandSource(CommandWrapper wrapper) {
+    public CommandProcessingResult logCommandSource(final CommandWrapper wrapper) {
         final String json = wrapper.getJson();
         CommandProcessingResult result = null;
         JsonCommand command = null;
         final JsonElement parsedCommand = this.fromApiJsonHelper.parse(json);
+        command = JsonCommand.from(json, parsedCommand, this.fromApiJsonHelper,
+                wrapper.getEntityName(), wrapper.getEntityId(), wrapper.getUserId(), wrapper.getHref());
         return null;
     }
 }

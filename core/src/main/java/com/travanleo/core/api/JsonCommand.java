@@ -16,22 +16,21 @@ public final class JsonCommand {
     private final FromJsonHelper fromApiJsonHelper;
     private final Long commandId;
     private final Long resourceId;
-    private final Long subresourceId;
     private final Long userId;
     private final String entityName;
     private final String url;
 
     public static JsonCommand from(final String jsonCommand, final JsonElement parsedCommand, final FromJsonHelper fromApiJsonHelper,
-            final String entityName, final Long resourceId, final Long subresourceId, final Long userId,
+            final String entityName, final Long resourceId, final Long userId,
             final String url) {
-        return new JsonCommand(null, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId, subresourceId, userId, url);
+        return new JsonCommand(null, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId, userId, url);
 
     }
 
     public static JsonCommand fromExistingCommand(final Long commandId, final String jsonCommand, final JsonElement parsedCommand,
-            final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId, final Long subresourceId,
+            final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId,
             final Long userId, final String url) {
-        return new JsonCommand(commandId, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId, subresourceId,
+        return new JsonCommand(commandId, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId,
                 userId, url);
 
     }
@@ -39,12 +38,11 @@ public final class JsonCommand {
     public static JsonCommand fromExistingCommand(JsonCommand command, final JsonElement parsedCommand) {
         final String jsonCommand = command.fromApiJsonHelper.toJson(parsedCommand);
         return new JsonCommand(command.commandId, jsonCommand, parsedCommand, command.fromApiJsonHelper, command.entityName,
-                command.resourceId, command.subresourceId, command.userId, command.url);
+                command.resourceId, command.userId, command.url);
     }
 
     public JsonCommand(final Long commandId, final String jsonCommand, final JsonElement parsedCommand,
-            final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId, final Long subresourceId,
-            final Long userId, final String url) {
+            final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId, final Long userId, final String url) {
 
         this.commandId = commandId;
         this.jsonCommand = jsonCommand;
@@ -52,7 +50,6 @@ public final class JsonCommand {
         this.fromApiJsonHelper = fromApiJsonHelper;
         this.entityName = entityName;
         this.resourceId = resourceId;
-        this.subresourceId = subresourceId;
         this.userId = userId;
         this.url = url;
     }
@@ -68,7 +65,6 @@ public final class JsonCommand {
         this.jsonCommand = null;        
         this.fromApiJsonHelper = null;
         this.entityName = null;
-        this.subresourceId = null;
         this.userId = null;
         this.url = null;
     }
@@ -108,11 +104,6 @@ public final class JsonCommand {
     public Long entityId() {
         return this.resourceId;
     }
-
-    public Long subentityId() {
-        return this.subresourceId;
-    }
-
 
     public Long getUserId() {
         return this.userId;

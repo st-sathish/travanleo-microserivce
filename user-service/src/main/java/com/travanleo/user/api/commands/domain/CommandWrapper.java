@@ -38,7 +38,23 @@ public class CommandWrapper {
         this.json = json;
     }
 
+    public String getHref() {
+        return this.href;
+    }
+
     public String getJson() {
         return this.json;
+    }
+
+    public String getEntityName() {
+        return this.entityName;
+    }
+
+    public Long getEntityId() {
+        return this.entityId;
+    }
+
+    public Long getUserId() {
+        return this.userId;
     }
 }
