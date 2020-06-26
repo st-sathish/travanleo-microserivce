@@ -1,4 +1,4 @@
-package com.travanleo.user.api.commands.domain;
+package com.travanleo.user.commands.domain;
 
 public class CommandWrapper {
 

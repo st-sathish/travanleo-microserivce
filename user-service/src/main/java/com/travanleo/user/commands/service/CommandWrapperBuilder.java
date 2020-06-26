@@ -1,6 +1,6 @@
-package com.travanleo.user.api.commands.service;
+package com.travanleo.user.commands.service;
 
-import com.travanleo.user.api.commands.domain.CommandWrapper;
+import com.travanleo.user.commands.domain.CommandWrapper;
 
 public class CommandWrapperBuilder {
 

@@ -1,12 +1,11 @@
 package com.travanleo.user.api;
 
 import com.travanleo.core.data.CommandProcessingResult;
-import com.travanleo.user.api.commands.domain.CommandWrapper;
-import com.travanleo.user.api.commands.service.CommandSourceWritePlatformService;
-import com.travanleo.user.api.commands.service.CommandWrapperBuilder;
+import com.travanleo.user.commands.domain.CommandWrapper;
+import com.travanleo.user.commands.service.CommandSourceWritePlatformService;
+import com.travanleo.user.commands.service.CommandWrapperBuilder;
 import com.travanleo.user.data.UserData;
 import com.travanleo.user.service.UserReadPlatformService;
-import com.travanleo.user.service.UserWritePlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
