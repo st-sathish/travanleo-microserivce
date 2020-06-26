@@ -9,6 +9,7 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
 }
 
 group 'com.travanleo'
@@ -36,8 +37,7 @@ configurations {
         exclude module: 'jaxb-api'
         exclude module: 'jaxb-impl'
     }
-    runtime
-    all*.exclude group: 'commons-logging'
+    runtime.all*.exclude group: 'commons-logging'
     driver
 }
 
@@ -91,4 +91,9 @@ task dropDB {
         sql.execute( 'DROP DATABASE '+"`$dbName`")
         println "Database dropped"
     }
+}
+
+jar {
+    archivesBaseName = 'user-service'
+    version = '0.0.1'
 }

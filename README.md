@@ -1,4 +1,17 @@
-## Getting Started
+### Getting Started
 
-- Execute the shell script to build all service jar files
-- Go to each service README.md docs to build independently
+- Change mysql username and password in user-service/build.gradle
+- Create database by executing the below command
+```sh
+gradle clean createDB --dbName=travanleo
+```
+
+### Build and Run
+- create executeable jar file
+```sh
+gradle clean bootJar
+```
+- Run user service
+```sh
+java -jar user-service
+```
