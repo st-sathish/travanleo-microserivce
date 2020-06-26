@@ -57,4 +57,8 @@ public class CommandWrapper {
     public Long getUserId() {
         return this.userId;
     }
+
+    public String getActionName() {
+        return this.actionName;
+    }
 }
