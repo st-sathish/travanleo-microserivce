@@ -1,10 +1,15 @@
 package com.travanleo.user.api;
 
+import com.travanleo.user.api.commands.domain.CommandWrapper;
+import com.travanleo.user.api.commands.service.CommandWrapperBuilder;
 import com.travanleo.user.data.UserData;
+import com.travanleo.user.service.UserReadPlatformService;
+import com.travanleo.user.service.UserWritePlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,9 +25,11 @@ import javax.ws.rs.core.Response;
 @Scope("singleton")
 public class UserApiResource {
 
+    private final UserReadPlatformService userReadPlatformService;
+
     @Autowired
-    public UserApiResource() {
-        System.out.println("Hello instance created");
+    public UserApiResource(final UserReadPlatformService userReadPlatformService) {
+        this.userReadPlatformService = userReadPlatformService;
     }
 
     @GET
@@ -34,23 +41,39 @@ public class UserApiResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response saveUser() {
+    public Response createUser(final String apiRequestBodyAsJson) {
         String greeting = "Hello ";
+        final CommandWrapper commandWrapper = new CommandWrapperBuilder()
+                .createUser()
+                .withJson(apiRequestBodyAsJson)
+                .build();
         return Response.ok(greeting).build();
     }
 
     @PUT
-    @Path("/:userId")
-    public Response updateUser() {
+    @Path("{userId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateUser(@PathParam("userId") final Long userId, final String apiRequestBodyAsJson) {
         String greeting = "Hello ";
+        final CommandWrapper commandWrapper = new CommandWrapperBuilder()
+                .updateUser(userId)
+                .withJson(apiRequestBodyAsJson)
+                .build();
         return Response.ok(greeting).build();
     }
 
     @DELETE
-    @Path("/:userId")
-    public Response removeUser() {
+    @Path("{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response removeUser(@PathParam("userId") final Long userId) {
         String greeting = "Hello ";
+        final CommandWrapper commandWrapper = new CommandWrapperBuilder()
+                .deleteUser(userId)
+                .build();
         return Response.ok(greeting).build();
     }
 }

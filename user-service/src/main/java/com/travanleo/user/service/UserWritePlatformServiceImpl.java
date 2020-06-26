@@ -1,4 +1,7 @@
 package com.travanleo.user.service;
 
-public class UserWritePlatformServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserWritePlatformServiceImpl implements UserWritePlatformService {
 }
