@@ -1,4 +1,4 @@
-package com.travanleo.user.entity;
+package com.travanleo.user.domain;
 
 import javax.persistence.Entity;
 

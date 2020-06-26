@@ -28,7 +28,7 @@ public class DataSourceConfiguration {
                 config.getSubProtocol(), config.getPort());
     }
 
-    @Bean
+    @Bean(name = "customDataSource")
     public DataSource dataSource() {
 	PoolConfiguration p = getProperties();
         org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource(p);
