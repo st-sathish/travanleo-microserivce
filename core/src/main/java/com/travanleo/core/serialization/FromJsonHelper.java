@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gson.JsonParser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -63,4 +65,11 @@ public class FromJsonHelper {
         return this.gsonConverter;
     }
 
+    public JsonElement parse(final String json) {
+        JsonElement parsedElement = null;
+        if (StringUtils.isNotBlank(json)) {
+            parsedElement = JsonParser.parseString(json);
+        }
+        return parsedElement;
+    }
 }

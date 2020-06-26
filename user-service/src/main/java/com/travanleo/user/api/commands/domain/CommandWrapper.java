@@ -37,4 +37,8 @@ public class CommandWrapper {
         this.href = resourceGetUrl;
         this.json = json;
     }
+
+    public String getJson() {
+        return this.json;
+    }
 }
