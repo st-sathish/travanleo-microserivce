@@ -1,6 +1,8 @@
 package com.travanleo.user.api;
 
+import com.travanleo.core.data.CommandProcessingResult;
 import com.travanleo.user.api.commands.domain.CommandWrapper;
+import com.travanleo.user.api.commands.service.CommandSourceWritePlatformService;
 import com.travanleo.user.api.commands.service.CommandWrapperBuilder;
 import com.travanleo.user.data.UserData;
 import com.travanleo.user.service.UserReadPlatformService;
@@ -26,10 +28,13 @@ import javax.ws.rs.core.Response;
 public class UserApiResource {
 
     private final UserReadPlatformService userReadPlatformService;
+    private final CommandSourceWritePlatformService commandSourceWritePlatformService;
 
     @Autowired
-    public UserApiResource(final UserReadPlatformService userReadPlatformService) {
+    public UserApiResource(final UserReadPlatformService userReadPlatformService,
+                           final CommandSourceWritePlatformService commandSourceWritePlatformService) {
         this.userReadPlatformService = userReadPlatformService;
+        this.commandSourceWritePlatformService = commandSourceWritePlatformService;
     }
 
     @GET
@@ -44,12 +49,12 @@ public class UserApiResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(final String apiRequestBodyAsJson) {
-        String greeting = "Hello ";
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .createUser()
                 .withJson(apiRequestBodyAsJson)
                 .build();
-        return Response.ok(greeting).build();
+        CommandProcessingResult result = commandSourceWritePlatformService.logCommandSource(commandWrapper);
+        return Response.ok(result).build();
     }
 
     @PUT
