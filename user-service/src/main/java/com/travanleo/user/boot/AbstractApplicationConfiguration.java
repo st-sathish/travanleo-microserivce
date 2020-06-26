@@ -18,7 +18,7 @@ import org.springframework.context.annotation.PropertySource;
         FlywayAutoConfiguration.class })
 @Import({WebXmlConfiguration.class})
 @ImportResource({ "classpath*:META-INF/spring/appContext.xml" })
-@PropertySource({ "classpath*:META-INF/spring/jdbc.properties"})
+@PropertySource(value = "classpath:META-INF/spring/jdbc.properties")
 public abstract class AbstractApplicationConfiguration {
 
 }

@@ -2,3 +2,5 @@
 .idea/**
 target/**
 build/**
+user-service/out/**
+core/out/**
