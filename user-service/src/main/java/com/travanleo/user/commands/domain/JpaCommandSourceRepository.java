@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaCommandRepository extends JpaRepository<CommandSource, Long> {
+public interface JpaCommandSourceRepository extends JpaRepository<CommandSource, Long> {
 
 }
