@@ -1,11 +1,27 @@
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.6.RELEASE'
+    }
+}
+
 plugins {
     id 'java'
 }
 
+apply plugin: 'spring-boot'
+
 group 'com.travanleo'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_HIGHER
+targetCompatibility = JavaVersion.VERSION_HIGHER
 
 project.ext.springBootVersion = '2.3.1.RELEASE'
 project.ext.springVersion = '4.0.7.RELEASE'
@@ -15,6 +31,22 @@ project.ext.springDataJpaVersion = '1.7.0.RELEASE'
 
 project.ext.mysqlUser='root'
 project.ext.mysqlPassword='mysql'
+
+import groovy.sql.Sql
+
+configurations {
+    providedRuntime // needed for Spring Boot executable WAR
+    providedCompile
+    compile() {
+        exclude module: 'activation'
+        exclude module: 'c3p0'
+        exclude module: 'jaxb-api'
+        exclude module: 'jaxb-impl'
+    }
+    runtime
+    all*.exclude group: 'commons-logging'
+    driver
+}
 
 repositories {
     mavenCentral()
@@ -36,4 +68,29 @@ dependencies {
             [group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'],
             [group: 'joda-time', name: 'joda-time', version: '2.4']
     )
+    driver 'mysql:mysql-connector-java:5.1.27'
+}
+
+/** load all drivers */
+def loader = GroovyObject.class.classLoader
+configurations.driver.each {File file ->
+    loader.addURL(file.toURI().toURL())
+}
+
+task createDB {
+    doLast {
+        description = "Creates the Database. Needs database name to be passed (like: -PdbName=someDBname)"
+        def sql = Sql.newInstance('jdbc:mysql://localhost:3306/', mysqlUser, mysqlPassword, 'com.mysql.jdbc.Driver')
+        sql.execute('CREATE DATABASE IF NOT EXISTS ' + "`$dbName`")
+        println "Database successfully created"
+    }
+}
+
+task dropDB {
+    doLast {
+        description= "Drops the specified database. The database name has to be passed (like: -PdbName=someDBname)"
+        def sql = Sql.newInstance( 'jdbc:mysql://localhost:3306/', mysqlUser, mysqlPassword, 'com.mysql.jdbc.Driver' )
+        sql.execute( 'DROP DATABASE '+"`$dbName`")
+        println "Database dropped"
+    }
 }
