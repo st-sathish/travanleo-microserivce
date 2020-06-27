@@ -11,46 +11,20 @@ import java.util.Map;
 public class CommandProcessingResult implements Serializable {
 
     private Long commandId;
-    private final Long userId = null;
     private final Map<String, Object> changes;
+    private final Long resourceId;
     @SuppressWarnings("unused")
     private final String resourceIdentifier;
     private Boolean rollbackTransaction;
 
-    public static CommandProcessingResult fromDetails(final Long commandId, final Long officeId, final Long groupId, final Long clientId,
-            final Long loanId, final Long savingsId, final String resourceIdentifier, final Long entityId, final String transactionId,
-            final Map<String, Object> changes, final Long productId, final Boolean rollbackTransaction, final Long subResourceId) {
-        return new CommandProcessingResult(commandId, officeId, groupId, clientId, loanId, savingsId, resourceIdentifier, entityId,
-                transactionId, changes, productId, rollbackTransaction, subResourceId);
-    }
-
-    public static CommandProcessingResult commandOnlyResult(final Long commandId) {
-        return new CommandProcessingResult(null, null, commandId, null);
-    }
-
-    public static CommandProcessingResult resourceResult(final Long resourceId, final Long commandId) {
-        return new CommandProcessingResult(resourceId, null, commandId, null);
-    }
-
-    public static CommandProcessingResult resourceResult(final Long resourceId, final Long commandId, final Map<String, Object> changes) {
-        return new CommandProcessingResult(resourceId, null, commandId, changes);
-    }
-
-    public static CommandProcessingResult subResourceResult(final Long resourceId, final Long subResourceId, final Long commandId) {
-        return new CommandProcessingResult(resourceId, subResourceId, commandId, null);
-    }
-
-    public static CommandProcessingResult subResourceResult(final Long resourceId, final Long subResourceId, final Long commandId,
-            final Map<String, Object> changes) {
-        return new CommandProcessingResult(resourceId, subResourceId, commandId, changes);
-    }
-
-    public static CommandProcessingResult withChanges(final Long resourceId, final Map<String, Object> changes) {
-        return new CommandProcessingResult(resourceId, null, null, changes);
+    public static CommandProcessingResult fromDetails(final Long commandId, final String resourceIdentifier,
+                                                      final Long entityId,
+            final Map<String, Object> changes, final Boolean rollbackTransaction) {
+        return new CommandProcessingResult(commandId, resourceIdentifier, entityId, changes, rollbackTransaction);
     }
 
     public static CommandProcessingResult empty() {
-        return new CommandProcessingResult(null, null, null, null);
+        return new CommandProcessingResult(null, null, null, null, null);
     }
 
     /*
@@ -62,19 +36,20 @@ public class CommandProcessingResult implements Serializable {
         } else {
             this.resourceIdentifier = null;
         }
+        this.resourceId = entityId;
         this.changes = new HashMap<>();
     }
 
-    private CommandProcessingResult(final Long commandId, final Long officeId, final Long groupId, final Long clientId, final Long loanId,
-            final Long savingsId, final String resourceIdentifier, final Long resourceId, final String transactionId,
-            final Map<String, Object> changesOnly, final Long productId, Boolean rollbackTransaction, final Long subResourceId) {
+    private CommandProcessingResult(final Long commandId, final String resourceIdentifier, final Long resourceId,
+            final Map<String, Object> changesOnly, Boolean rollbackTransaction) {
         this.commandId = commandId;
         this.resourceIdentifier = resourceIdentifier;
         this.changes = changesOnly;
         this.rollbackTransaction = rollbackTransaction;
+        this.resourceId = resourceId;
     }
 
-    private CommandProcessingResult(final Long resourceId, final Long officeId, final Long commandId, final Map<String, Object> changesOnly) {
+    private CommandProcessingResult(final Long resourceId, final Long commandId, final Map<String, Object> changesOnly) {
         if (resourceId != null) {
             this.resourceIdentifier = resourceId.toString();
         } else {
@@ -82,6 +57,7 @@ public class CommandProcessingResult implements Serializable {
         }
         this.commandId = commandId;
         this.changes = changesOnly;
+        this.resourceId = resourceId;
     }
 
     public Long commandId() {
@@ -107,5 +83,13 @@ public class CommandProcessingResult implements Serializable {
 
     public void setRollbackTransaction(Boolean rollbackTransaction) {
         this.rollbackTransaction = rollbackTransaction;
+    }
+
+    public Long getResourceId() {
+        return this.resourceId;
+    }
+
+    public Long getCommandId() {
+        return this.commandId;
     }
 }

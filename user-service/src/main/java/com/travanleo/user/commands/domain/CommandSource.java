@@ -41,9 +41,6 @@ public class CommandSource extends AbstractPersistableCustom<Long> {
 
     @Column(name = "processing_result_enum", nullable = false)
     private Integer processingResult;
-    
-    @Column(name = "transaction_id", length = 100)
-    private String transactionId;
 
     @Column(name = "checked_on_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -118,7 +115,6 @@ public class CommandSource extends AbstractPersistableCustom<Long> {
 
     public void updateForAudit(final Long userId, final String transactionId) {
         this.userId = userId;
-        this.transactionId = transactionId;
     }
 
     public String getResourceGetUrl() {
@@ -128,16 +124,4 @@ public class CommandSource extends AbstractPersistableCustom<Long> {
     public Long getUserId() {
         return this.userId;
     }
-
-    /**
-     * @return the transactionId
-     */
-    public String getTransactionId() {
-        return this.transactionId;
-    }
-
-    public void updateTransaction(final String transactionId) {
-        this.transactionId = transactionId;
-    }
-
 }
