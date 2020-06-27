@@ -11,12 +11,12 @@ public class CommandProcessingResultBuilder {
     private Long commandId;
     private String resourceIdentifier;
     private Long entityId;
+    private Long userId;
     private Map<String, Object> changes;
-    private boolean rollbackTransaction = false;
 
     public CommandProcessingResult build() {
         return CommandProcessingResult.fromDetails(this.commandId,
-                this.resourceIdentifier, this.entityId, this.changes, this.rollbackTransaction);
+                this.resourceIdentifier, this.entityId, this.changes);
     }
 
     public CommandProcessingResultBuilder withCommandId(final Long withCommandId) {
@@ -34,14 +34,13 @@ public class CommandProcessingResultBuilder {
         return this;
     }
 
+    public CommandProcessingResultBuilder withUserId(final Long withUserId) {
+        this.userId = withUserId;
+        return this;
+    }
+
     public CommandProcessingResultBuilder withEntityId(final Long withEntityId) {
         this.entityId = withEntityId;
         return this;
     }
-    
-    public CommandProcessingResultBuilder setRollbackTransaction(final boolean rollbackTransaction) {
-        this.rollbackTransaction = this.rollbackTransaction || rollbackTransaction;
-        return this;
-    }
-
 }

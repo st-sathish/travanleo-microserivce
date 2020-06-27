@@ -57,10 +57,6 @@ public class FromJsonHelper {
         return this.helperDelegator.extractStringNamed(parameterName, element, new HashSet<String>());
     }
 
-    public String extractStringNamed(final String parameterName, final JsonElement element, final Set<String> parametersPassedInRequest) {
-        return this.helperDelegator.extractStringNamed(parameterName, element, parametersPassedInRequest);
-    }
-
     public Gson getGsonConverter() {
         return this.gsonConverter;
     }
@@ -71,5 +67,13 @@ public class FromJsonHelper {
             parsedElement = JsonParser.parseString(json);
         }
         return parsedElement;
+    }
+
+    public Long extractLongNamed(final String parameterName, final JsonElement element) {
+        return this.helperDelegator.extractLongNamed(parameterName, element, new HashSet<>());
+    }
+
+    public Integer extractIntegerNamed(final String parameterName, final JsonElement element) {
+        return this.helperDelegator.extractIntegerNamed(parameterName, element, new HashSet<>());
     }
 }

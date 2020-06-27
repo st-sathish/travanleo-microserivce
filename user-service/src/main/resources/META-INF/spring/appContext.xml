@@ -19,7 +19,8 @@
     </context:component-scan>
 
     <!-- enable jpa repository -->
-    <jpa:repositories base-package="com.travanleo.user.commands.domain" />
+    <jpa:repositories base-package="com.travanleo.user.commands.domain,
+                        com.travanleo.user.domain" />
 
     <import resource="infrastructure.xml" />
 </beans>

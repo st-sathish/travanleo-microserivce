@@ -2,6 +2,7 @@ package com.travanleo.core.api;
 
 import com.google.gson.JsonElement;
 import com.travanleo.core.serialization.FromJsonHelper;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Immutable representation of a command.
@@ -120,5 +121,18 @@ public final class JsonCommand {
 
     public boolean hasParameter(final String parameterName) {
         return parameterExists(parameterName);
+    }
+
+    public String stringValueOfParameterNamed(final String parameterName) {
+        final String value = this.fromApiJsonHelper.extractStringNamed(parameterName, this.parsedCommand);
+        return StringUtils.defaultIfEmpty(value, "");
+    }
+
+    public Long longValueOfParameterNamed(final String parameterName) {
+        return this.fromApiJsonHelper.extractLongNamed(parameterName, this.parsedCommand);
+    }
+
+    public Integer integerValueOfParameterNamed(final String parameterName) {
+        return this.fromApiJsonHelper.extractIntegerNamed(parameterName, this.parsedCommand);
     }
 }

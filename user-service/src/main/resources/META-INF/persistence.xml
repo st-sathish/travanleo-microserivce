@@ -6,6 +6,7 @@
 	<persistence-unit name="jpa-pu" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.travanleo.user.commands.domain.CommandSource</class>
+		<class>com.travanleo.user.domain.User</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

@@ -19,12 +19,12 @@ public class CommandProcessingResult implements Serializable {
 
     public static CommandProcessingResult fromDetails(final Long commandId, final String resourceIdentifier,
                                                       final Long entityId,
-            final Map<String, Object> changes, final Boolean rollbackTransaction) {
-        return new CommandProcessingResult(commandId, resourceIdentifier, entityId, changes, rollbackTransaction);
+            final Map<String, Object> changes) {
+        return new CommandProcessingResult(commandId, resourceIdentifier, entityId, changes);
     }
 
     public static CommandProcessingResult empty() {
-        return new CommandProcessingResult(null, null, null, null, null);
+        return new CommandProcessingResult(null, null, null, null);
     }
 
     /*
@@ -41,11 +41,10 @@ public class CommandProcessingResult implements Serializable {
     }
 
     private CommandProcessingResult(final Long commandId, final String resourceIdentifier, final Long resourceId,
-            final Map<String, Object> changesOnly, Boolean rollbackTransaction) {
+            final Map<String, Object> changesOnly) {
         this.commandId = commandId;
         this.resourceIdentifier = resourceIdentifier;
         this.changes = changesOnly;
-        this.rollbackTransaction = rollbackTransaction;
         this.resourceId = resourceId;
     }
 
@@ -75,14 +74,6 @@ public class CommandProcessingResult implements Serializable {
     public boolean hasChanges() {
         final boolean noChanges = this.changes == null || this.changes.isEmpty();
         return !noChanges;
-    }
-
-    public boolean isRollbackTransaction() {
-        return this.rollbackTransaction != null && this.rollbackTransaction;
-    }
-
-    public void setRollbackTransaction(Boolean rollbackTransaction) {
-        this.rollbackTransaction = rollbackTransaction;
     }
 
     public Long getResourceId() {
