@@ -10,34 +10,19 @@ import org.springframework.util.StringUtils;
 // only explicitly declared in DataSourceConfiguration (if that's active)
 public class DataSourceProperties extends PoolProperties {
 
-    public final static String PORT = "travanleo.datasource.port";
-    public final static String HOST = "travanleo.datasource.host";
-    public final static String DB = "travanleo.datasource.db";
-    public final static String UID = "travanleo.datasource.username";
-    public final static String PWD = "travanleo.datasource.password";
-    public final static String PROTOCOL = "travanleo.datasource.protocol";
-    public final static String SUBPROTOCOL = "travanleo.datasource.subprotocol";
+    private int port = 3306;
 
-    @Value("${" + PORT + ":3306}")
-    private volatile @NotNull int port;
+    private String hostname = "localhost";
 
-    @Value("${" + HOST + ":localhost}")
-    private volatile @NotNull String hostname;
+    private String dbName = "travanleo";
 
-    @Value("${" + DB + ":travanleo}")
-    private volatile @NotNull String dbName;
+    private String username = "root";
 
-    @Value("${" + UID + ":root}")
-    private volatile @NotNull String username;
+    private String password = "mysql";
 
-    @Value("${" + PWD + ":mysql}")
-    private volatile @NotNull String password;
+    private String jdbcProtocol = "jdbc";
 
-    @Value("${" + PROTOCOL + ":jdbc}")
-    private volatile @NotNull String jdbcProtocol;
-
-    @Value("${" + SUBPROTOCOL + ":mysql}")
-    private volatile @NotNull String jdbcSubprotocol;
+    private String jdbcSubprotocol = "mysql";
 
     public DataSourceProperties(String driverClassName, String protocol, String subProtocol, Integer port) {
         super();

@@ -51,6 +51,7 @@ dependencies {
     compile(
             [group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion],
             [group: 'org.springframework', name: 'spring-context-support', version: springVersion],
+            [group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: springBootVersion],
             [group: 'javax.ws.rs', name: 'jsr311-api', version: '1.1.1'],
             [group: 'com.sun.jersey', name: 'jersey-core', version: jerseyVersion],
             [group: 'com.sun.jersey', name: 'jersey-server', version: jerseyVersion],
@@ -60,7 +61,8 @@ dependencies {
             [group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'],
             [group: 'joda-time', name: 'joda-time', version: '2.4'],
             [group: 'com.sun.jersey', name: 'jersey-servlet', version: jerseyVersion],
-            [group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final']
+            [group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'],
+            [group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.0.1.RELEASE']
     )
 }
 
