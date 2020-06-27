@@ -2,5 +2,16 @@
 .idea/**
 target/**
 build/**
+out/**
+user-service/build/**
+comment-service/target/**
+core/target/**
+auth-service/target/**
+user-service/build/**
+core/build/**
+comment-service/build/**
+auth-service/build/**
 user-service/out/**
 core/out/**
+comment-service/out/**
+auth-service/out/**

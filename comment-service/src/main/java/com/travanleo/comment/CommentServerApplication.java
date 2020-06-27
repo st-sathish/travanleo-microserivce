@@ -1,6 +1,6 @@
 package com.travanleo.comment;
 
-import com.travanleo.user.boot.AbstractApplicationConfiguration;
+import com.travanleo.comment.boot.AbstractApplicationConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 

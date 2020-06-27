@@ -9,9 +9,9 @@ gradle clean createDB --dbName=travanleo
 ### Build and Run
 - create executeable jar file
 ```sh
-gradle clean bootJar
+./gradlew clean build
 ```
 - Run user service
 ```sh
-java -jar user-service
+java -jar user-service-0.0.1-SNAPSHOT.jar
 ```
