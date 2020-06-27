@@ -25,6 +25,10 @@ public class User extends AbstractPersistableCustom {
     @Column(name = "email", nullable = false)
     private String email;
 
+    public User() {
+        // required
+    }
+
     public User(final String firstName, final String lastName, final Long mobile,
                 final Integer age, final String email) {
         this.firstName = firstName;

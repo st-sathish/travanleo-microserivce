@@ -17,9 +17,13 @@ public class CommandSourceWritePlatformServiceImpl implements CommandSourceWrite
 
     private FromJsonHelper fromApiJsonHelper;
 
+    private CommandProcessingService commandProcessingService;
+
     @Autowired
-    public CommandSourceWritePlatformServiceImpl(final FromJsonHelper fromApiJsonHelper) {
+    public CommandSourceWritePlatformServiceImpl(final FromJsonHelper fromApiJsonHelper,
+                                                 final CommandProcessingService commandProcessingService) {
         this.fromApiJsonHelper = fromApiJsonHelper;
+        this.commandProcessingService = commandProcessingService;
     }
 
     @Override
@@ -31,13 +35,10 @@ public class CommandSourceWritePlatformServiceImpl implements CommandSourceWrite
         command = JsonCommand.from(json, parsedCommand, this.fromApiJsonHelper,
                 wrapper.getEntityName(), wrapper.getEntityId(), wrapper.getUserId(), wrapper.getHref());
         try {
-
+            result = commandProcessingService.processAndLogCommand(wrapper, command);
         } catch (Exception e) {
             // handle exception
         }
-
-        //create empty response
-        result = CommandProcessingResult.empty();
         return result;
     }
 }

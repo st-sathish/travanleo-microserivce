@@ -35,7 +35,7 @@ public class UserWritePlatformServiceImpl implements UserWritePlatformService {
     public CommandProcessingResult createUser(final JsonCommand command) {
         try {
             // validate
-            userDataValidator.validateForCreate(command.toString());
+            userDataValidator.validateForCreate(command.json());
             String firstName = command.stringValueOfParameterNamed(UserApiConstants.FIRST_NAME);
             String lastName = command.stringValueOfParameterNamed(UserApiConstants.LAST_NAME);
             Long mobile = command.longValueOfParameterNamed(UserApiConstants.MOBILE);
