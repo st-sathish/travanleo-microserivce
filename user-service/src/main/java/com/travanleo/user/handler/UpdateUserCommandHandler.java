@@ -23,6 +23,6 @@ public class UpdateUserCommandHandler implements CommandSourceHandler {
     @Transactional
     @Override
     public CommandProcessingResult processCommand(final JsonCommand command) {
-        return null;
+        return userWritePlatformService.updateUser(command.getUserId(), command);
     }
 }

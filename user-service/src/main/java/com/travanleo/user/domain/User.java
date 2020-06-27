@@ -1,10 +1,14 @@
 package com.travanleo.user.domain;
 
+import com.travanleo.core.api.JsonCommand;
 import com.travanleo.core.domain.AbstractPersistableCustom;
+import com.travanleo.user.api.UserApiConstants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Entity(name = "User")
 @Table(name = "user")
@@ -84,5 +88,42 @@ public class User extends AbstractPersistableCustom {
 
     public void updateLastName(final String lastName) {
         this.lastName = lastName;
+    }
+
+    public void updateAge(final Integer age) {
+        this.age = age;
+    }
+
+    public void updateMobile(final Long mobile) {
+        this.mobile = mobile;
+    }
+
+    public void updateEmail(final String email) {
+        this.email = email;
+    }
+
+    public Map<String, Object> update(final JsonCommand command) {
+        final Map<String, Object> actualChanges = new LinkedHashMap<>(9);
+        if (command.isChangeInStringParameterNamed(UserApiConstants.FIRST_NAME, this.firstName)) {
+            final String newValue = command.stringValueOfParameterNamed(UserApiConstants.FIRST_NAME);
+            actualChanges.put(UserApiConstants.FIRST_NAME, newValue);
+        }
+        if (command.isChangeInStringParameterNamed(UserApiConstants.LAST_NAME, this.lastName)) {
+            final String newValue = command.stringValueOfParameterNamed(UserApiConstants.LAST_NAME);
+            actualChanges.put(UserApiConstants.LAST_NAME, newValue);
+        }
+        if (command.isChangeInStringParameterNamed(UserApiConstants.email, this.email)) {
+            final String newValue = command.stringValueOfParameterNamed(UserApiConstants.email);
+            actualChanges.put(UserApiConstants.email, newValue);
+        }
+        if (command.isChangeInLongParameterNamed(UserApiConstants.MOBILE, this.mobile)) {
+            final Long newValue = command.longValueOfParameterNamed(UserApiConstants.MOBILE);
+            actualChanges.put(UserApiConstants.MOBILE, newValue);
+        }
+        if (command.isChangeInStringParameterNamed(UserApiConstants.email, this.email)) {
+            final String newValue = command.stringValueOfParameterNamed(UserApiConstants.email);
+            actualChanges.put(UserApiConstants.email, newValue);
+        }
+        return actualChanges;
     }
 }

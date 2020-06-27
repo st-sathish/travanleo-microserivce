@@ -11,6 +11,7 @@ import com.travanleo.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -59,20 +60,38 @@ public class UserWritePlatformServiceImpl implements UserWritePlatformService {
         try {
             final User user = userRepositoryWrapper.findOneWithNotFoundDetection(userId);
             // validate
-            userDataValidator.validateForCreate(command.toString());
-            String firstName = command.stringValueOfParameterNamed(UserApiConstants.FIRST_NAME);
-            String lastName = command.stringValueOfParameterNamed(UserApiConstants.LAST_NAME);
-            Long mobile = command.longValueOfParameterNamed(UserApiConstants.MOBILE);
-            Integer age = command.integerValueOfParameterNamed(UserApiConstants.ageParamName);
-            String email = command.stringValueOfParameterNamed(UserApiConstants.email);
+            userDataValidator.validateForUpdate(command.json());
 
-            user.updateFirstName(firstName);
-            user.updateLastName(lastName);
-            userRepository.saveAndFlush(user);
+            final Map<String, Object> changes = user.update(command);
+            if(changes.containsKey(UserApiConstants.FIRST_NAME)) {
+                String firstName = command.stringValueOfParameterNamed(UserApiConstants.FIRST_NAME);
+                user.updateFirstName(firstName);
+            }
+            if(changes.containsKey(UserApiConstants.LAST_NAME)) {
+                String lastName = command.stringValueOfParameterNamed(UserApiConstants.LAST_NAME);
+                user.updateLastName(lastName);
+            }
+            if(changes.containsKey(UserApiConstants.email)) {
+                String email = command.stringValueOfParameterNamed(UserApiConstants.email);
+                user.updateEmail(email);
+            }
+            if(changes.containsKey(UserApiConstants.MOBILE)) {
+                Long mobile = command.longValueOfParameterNamed(UserApiConstants.MOBILE);
+                user.updateMobile(mobile);
+            }
+            if(changes.containsKey(UserApiConstants.ageParamName)) {
+                Integer age = command.integerValueOfParameterNamed(UserApiConstants.ageParamName);
+                user.updateAge(age);
+            }
+
+            if (!changes.isEmpty()) {
+                this.userRepository.saveAndFlush(user);
+            }
             return new CommandProcessingResultBuilder()
                     .withCommandId(command.commandId())
                     .withUserId(user.getId())
                     .withEntityId(user.getId())
+                    .with(changes)
                     .build();
         } catch (Exception e) {
             return CommandProcessingResult.empty();
@@ -81,6 +100,12 @@ public class UserWritePlatformServiceImpl implements UserWritePlatformService {
 
     @Override
     public CommandProcessingResult deleteUser(final Long userId, final JsonCommand command) {
-        return CommandProcessingResult.empty();
+        final User user = userRepositoryWrapper.findOneWithNotFoundDetection(userId);
+        this.userRepository.delete(user);
+        this.userRepository.flush();
+        return new CommandProcessingResultBuilder()
+                .withUserId(userId)
+                .withEntityId(userId)
+                .build();
     }
 }

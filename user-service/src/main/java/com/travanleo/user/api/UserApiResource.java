@@ -61,12 +61,12 @@ public class UserApiResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(@PathParam("userId") final Long userId, final String apiRequestBodyAsJson) {
-        String greeting = "Hello ";
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .updateUser(userId)
                 .withJson(apiRequestBodyAsJson)
                 .build();
-        return Response.ok(greeting).build();
+        CommandProcessingResult result = commandSourceWritePlatformService.logCommandSource(commandWrapper);
+        return Response.ok(result).build();
     }
 
     @DELETE
@@ -74,10 +74,10 @@ public class UserApiResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response removeUser(@PathParam("userId") final Long userId) {
-        String greeting = "Hello ";
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .deleteUser(userId)
                 .build();
-        return Response.ok(greeting).build();
+        CommandProcessingResult result = commandSourceWritePlatformService.logCommandSource(commandWrapper);
+        return Response.ok(result).build();
     }
 }
