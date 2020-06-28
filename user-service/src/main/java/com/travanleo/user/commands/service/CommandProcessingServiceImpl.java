@@ -1,12 +1,12 @@
 package com.travanleo.user.commands.service;
 
-import com.travanleo.core.api.JsonCommand;
-import com.travanleo.core.commands.handler.CommandSourceHandler;
-import com.travanleo.core.commands.provider.CommandHandlerProvider;
-import com.travanleo.core.data.CommandProcessingResult;
+import com.travanleo.user.api.JsonCommand;
 import com.travanleo.user.commands.domain.CommandSource;
 import com.travanleo.user.commands.domain.CommandWrapper;
 import com.travanleo.user.commands.domain.JpaCommandSourceRepository;
+import com.travanleo.user.commands.handler.CommandSourceHandler;
+import com.travanleo.user.commands.provider.CommandHandlerProvider;
+import com.travanleo.user.data.CommandProcessingResult;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

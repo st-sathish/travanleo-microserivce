@@ -8,8 +8,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.travanleo.core.api.JsonCommand;
 import com.travanleo.core.domain.AbstractPersistableCustom;
+import com.travanleo.user.api.JsonCommand;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 

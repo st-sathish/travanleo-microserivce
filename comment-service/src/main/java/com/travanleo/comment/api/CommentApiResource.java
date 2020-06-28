@@ -3,9 +3,8 @@ package com.travanleo.comment.api;
 import com.travanleo.comment.commands.data.CommandWrapper;
 import com.travanleo.comment.commands.service.CommandSourceWritePlatformService;
 import com.travanleo.comment.commands.service.CommandWrapperBuilder;
+import com.travanleo.comment.data.CommandProcessingResult;
 import com.travanleo.comment.service.CommentReadPlatformService;
-import com.travanleo.comment.service.CommentWritePlatformService;
-import com.travanleo.core.data.CommandProcessingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -41,6 +40,6 @@ public class CommentApiResource {
                 .withJson(apiRequestBodyAsJson)
                 .build();
         CommandProcessingResult result = commandSourceWritePlatformService.logCommandSource(commandWrapper);
-        return Response.ok("hello").build();
+        return Response.ok(result).build();
     }
 }

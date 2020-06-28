@@ -1,9 +1,9 @@
 package com.travanleo.comment.commands.service;
 
 import com.google.gson.JsonElement;
+import com.travanleo.comment.api.JsonCommand;
 import com.travanleo.comment.commands.data.CommandWrapper;
-import com.travanleo.core.api.JsonCommand;
-import com.travanleo.core.data.CommandProcessingResult;
+import com.travanleo.comment.data.CommandProcessingResult;
 import com.travanleo.core.serialization.FromJsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

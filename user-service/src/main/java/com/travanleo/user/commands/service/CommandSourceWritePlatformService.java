@@ -1,7 +1,7 @@
 package com.travanleo.user.commands.service;
 
-import com.travanleo.core.data.CommandProcessingResult;
 import com.travanleo.user.commands.domain.CommandWrapper;
+import com.travanleo.user.data.CommandProcessingResult;
 
 public interface CommandSourceWritePlatformService {
 

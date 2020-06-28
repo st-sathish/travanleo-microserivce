@@ -1,9 +1,9 @@
 package com.travanleo.user.api;
 
-import com.travanleo.core.data.CommandProcessingResult;
 import com.travanleo.user.commands.domain.CommandWrapper;
 import com.travanleo.user.commands.service.CommandSourceWritePlatformService;
 import com.travanleo.user.commands.service.CommandWrapperBuilder;
+import com.travanleo.user.data.CommandProcessingResult;
 import com.travanleo.user.data.UserData;
 import com.travanleo.user.service.UserReadPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
