@@ -31,6 +31,11 @@ public class CommandSourceWritePlatformServiceImpl implements CommandSourceWrite
         command = JsonCommand.from(json, parsedCommand, this.fromApiJsonHelper,
                 commandWrapper.getEntityName(), commandWrapper.getEntityId(),
                 commandWrapper.getCommentId(), commandWrapper.getHref());
-        return this.commandSourceProcessingService.processAndLogCommand(commandWrapper, command);
+        try {
+            result = this.commandSourceProcessingService.processAndLogCommand(commandWrapper, command);
+        } catch (Exception e) {
+            return CommandProcessingResult.empty();
+        }
+        return result;
     }
 }
