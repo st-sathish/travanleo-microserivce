@@ -1,4 +1,4 @@
-package com.travanleo.core.data;
+package com.travanleo.user.data;
 
 import java.util.Map;
 

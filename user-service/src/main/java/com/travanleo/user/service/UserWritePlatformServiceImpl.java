@@ -1,9 +1,9 @@
 package com.travanleo.user.service;
 
-import com.travanleo.core.api.JsonCommand;
-import com.travanleo.core.data.CommandProcessingResult;
-import com.travanleo.core.data.CommandProcessingResultBuilder;
+import com.travanleo.user.api.JsonCommand;
 import com.travanleo.user.api.UserApiConstants;
+import com.travanleo.user.data.CommandProcessingResult;
+import com.travanleo.user.data.CommandProcessingResultBuilder;
 import com.travanleo.user.data.UserDataValidator;
 import com.travanleo.user.domain.JpaUserRepository;
 import com.travanleo.user.domain.JpaUserRepositoryWrapper;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class UserWritePlatformServiceImpl implements UserWritePlatformService {

@@ -1,7 +1,7 @@
 package com.travanleo.user.domain;
 
-import com.travanleo.core.api.JsonCommand;
 import com.travanleo.core.domain.AbstractPersistableCustom;
+import com.travanleo.user.api.JsonCommand;
 import com.travanleo.user.api.UserApiConstants;
 
 import javax.persistence.Column;

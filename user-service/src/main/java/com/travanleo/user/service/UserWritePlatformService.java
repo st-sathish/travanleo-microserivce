@@ -1,7 +1,8 @@
 package com.travanleo.user.service;
 
-import com.travanleo.core.api.JsonCommand;
-import com.travanleo.core.data.CommandProcessingResult;
+
+import com.travanleo.user.api.JsonCommand;
+import com.travanleo.user.data.CommandProcessingResult;
 
 public interface UserWritePlatformService {
 

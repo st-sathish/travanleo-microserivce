@@ -1,4 +1,4 @@
-package com.travanleo.core.data;
+package com.travanleo.user.data;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class CommandProcessingResult implements Serializable {
 
     public static CommandProcessingResult fromDetails(final Long commandId, final String resourceIdentifier,
                                                       final Long entityId,
-            final Map<String, Object> changes) {
+                                                      final Map<String, Object> changes) {
         return new CommandProcessingResult(commandId, resourceIdentifier, entityId, changes);
     }
 

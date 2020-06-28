@@ -1,4 +1,4 @@
-package com.travanleo.core.api;
+package com.travanleo.comment.api;
 
 import com.google.gson.JsonElement;
 import com.travanleo.core.serialization.FromJsonHelper;
@@ -22,15 +22,15 @@ public final class JsonCommand {
     private final String url;
 
     public static JsonCommand from(final String jsonCommand, final JsonElement parsedCommand, final FromJsonHelper fromApiJsonHelper,
-            final String entityName, final Long resourceId, final Long userId,
-            final String url) {
+                                   final String entityName, final Long resourceId, final Long userId,
+                                   final String url) {
         return new JsonCommand(null, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId, userId, url);
 
     }
 
     public static JsonCommand fromExistingCommand(final Long commandId, final String jsonCommand, final JsonElement parsedCommand,
-            final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId,
-            final Long userId, final String url) {
+                                                  final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId,
+                                                  final Long userId, final String url) {
         return new JsonCommand(commandId, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId,
                 userId, url);
 
@@ -62,7 +62,7 @@ public final class JsonCommand {
     }
 
     public JsonCommand(final Long commandId, final String jsonCommand, final JsonElement parsedCommand,
-            final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId, final Long userId, final String url) {
+                       final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId, final Long userId, final String url) {
 
         this.commandId = commandId;
         this.jsonCommand = jsonCommand;
