@@ -1,3 +1,5 @@
+import groovy.sql.Sql
+
 plugins {
     id 'java'
 }
@@ -11,10 +13,43 @@ repositories {
     mavenCentral()
 }
 
+project.ext.springBootVersion = '2.3.1.RELEASE'
+project.ext.springVersion = '4.0.7.RELEASE'
+project.ext.springOauthVersion = '2.0.4.RELEASE'
+project.ext.jerseyVersion = '1.17'
+project.ext.springDataJpaVersion = '1.7.0.RELEASE'
+
+project.ext.mysqlUser='root'
+project.ext.mysqlPassword='mysql'
+
+import groovy.sql.Sql
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile project(':core')
     compile(
             [group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.1.RELEASE'],
-            [group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.3.1.RELEASE'])
+            [group: 'org.springframework.boot', name:'spring-boot-starter-security', version: springBootVersion],
+            [group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: springBootVersion],
+            [group: 'org.springframework', name: 'spring-context-support', version: springVersion],
+            [group: 'org.springframework.security.oauth.boot', name:'spring-security-oauth2-autoconfigure', version: '2.1.2.RELEASE'],
+            [group: 'org.springframework.boot', name:'spring-boot-configuration-processor'],
+            [group: 'mysql', name: 'mysql-connector-java', version: '5.1.27']
+    )
+    driver 'mysql:mysql-connector-java:5.1.27'
+}
+
+/** load all drivers */
+def loader = GroovyObject.class.classLoader
+configurations.driver.each {File file ->
+    loader.addURL(file.toURI().toURL())
+}
+
+task createDB {
+    doLast {
+        description = "Creates the Database. Needs database name to be passed (like: -PdbName=someDBname)"
+        def sql = Sql.newInstance('jdbc:mysql://localhost:3306/', mysqlUser, mysqlPassword, 'com.mysql.jdbc.Driver')
+        sql.execute('CREATE DATABASE IF NOT EXISTS ' + "`$dbName`")
+        println "Database successfully created"
+    }
 }

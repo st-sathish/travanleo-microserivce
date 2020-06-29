@@ -1,14 +1,16 @@
 package com.travanleo.auth;
 
 import com.travanleo.auth.boot.AbstractApplicationConfiguration;
+import com.travanleo.auth.boot.db.DataSourceConfiguration;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 
-public class AuthApplication {
+public class AuthServerApplication {
 
+    @Import({DataSourceConfiguration.class})
     private static class Configuration extends AbstractApplicationConfiguration { }
 
     public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext ctx = SpringApplication.run(Configuration.class, args);
+        SpringApplication.run(Configuration.class, args);
     }
 }
