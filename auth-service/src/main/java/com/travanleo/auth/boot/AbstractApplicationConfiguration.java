@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
 
 @Configuration
@@ -17,6 +19,7 @@ import org.springframework.context.annotation.ImportResource;
         DataSourceTransactionManagerAutoConfiguration.class,
         FlywayAutoConfiguration.class })
 @ImportResource({ "classpath*:META-INF/appContext.xml" })
+@PropertySource(value = "classpath:META-INF/jdbc.properties")
 public abstract class AbstractApplicationConfiguration {
 
 }
