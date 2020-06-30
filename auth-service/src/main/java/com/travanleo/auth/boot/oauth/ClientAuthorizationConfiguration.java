@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -17,7 +18,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import javax.sql.DataSource;
 
 @Configuration
-public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public class ClientAuthorizationConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private DataSource ds;
@@ -41,7 +42,8 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
     @Override
     public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
         // This will enable /oauth/check_token access
-        cfg.checkTokenAccess("permitAll");
+        cfg.checkTokenAccess("permitAll")
+                .checkTokenAccess("isAuthenticated()");
         // BCryptPasswordEncoder(4) is used for oauth_client_details.user_secret
         cfg.passwordEncoder(clientPasswordEncoder());
     }
