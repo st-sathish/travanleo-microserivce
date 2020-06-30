@@ -13,50 +13,60 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableAuthorizationServer
 public class ClientAuthorizationConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private DataSource ds;
 
     @Autowired
-    private AuthenticationManager authMgr;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Bean
     public TokenStore tokenStore() {
-        return new JdbcTokenStore(ds);
-    }
-
-    @Bean("clientPasswordEncoder")
-    public PasswordEncoder clientPasswordEncoder() {
-        return new BCryptPasswordEncoder(4);
+        return new InMemoryTokenStore();
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
         // This will enable /oauth/check_token access
-        cfg.checkTokenAccess("permitAll")
-                .checkTokenAccess("isAuthenticated()");
-        // BCryptPasswordEncoder(4) is used for oauth_client_details.user_secret
-        cfg.passwordEncoder(clientPasswordEncoder());
+        cfg.checkTokenAccess("isAuthenticated()");
+        // BCryptPasswordEncoder() is used for oauth_client_details.user_secret
+        cfg.passwordEncoder(passwordEncoder);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(ds);
+        clients.jdbc(ds)
+                .passwordEncoder(passwordEncoder);
+        /*clients.inMemory()
+                .withClient("client")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+                .scopes("read", "write")
+                .autoApprove(true)
+                .secret(passwordEncoder.encode("password"));*/
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore());
-        endpoints.authenticationManager(authMgr);
-        endpoints.userDetailsService(userDetailsService);
+        /*endpoints.tokenStore(tokenStore());
+        endpoints.authenticationManager(authenticationManager);
+        endpoints.userDetailsService(userDetailsService);*/
+        endpoints
+                .authenticationManager(authenticationManager)
+                .tokenStore(tokenStore())
+                .userDetailsService(userDetailsService);
     }
 }

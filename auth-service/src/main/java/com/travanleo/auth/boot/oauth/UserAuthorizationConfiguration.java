@@ -1,14 +1,12 @@
 package com.travanleo.auth.boot.oauth;
 
-import com.travanleo.auth.security.UserDetailsServiceImpl;
+import com.travanleo.auth.security.DefaultUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -28,12 +26,12 @@ public class UserAuthorizationConfiguration extends WebSecurityConfigurerAdapter
     @Override
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+        return new DefaultUserDetailsService();
     }
 
+    @Bean(name = "authenticationManager")
     @Override
-    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -45,19 +43,27 @@ public class UserAuthorizationConfiguration extends WebSecurityConfigurerAdapter
         return authProvider;
     }
 
-    @Bean("passwordEncoder")
+    @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(4);
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // BCryptPasswordEncoder(4) is used for users.password column
-        JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
+        /*JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
                 .passwordEncoder(passwordEncoder())
-                .dataSource(ds);
-        cfg.getUserDetailsService().setEnableGroups(false);
-        cfg.getUserDetailsService().setEnableAuthorities(false);
-        //auth.authenticationProvider(authenticationProvider());
+                .dataSource(ds);*/
+        /*cfg.getUserDetailsService().setEnableGroups(false);
+        cfg.getUserDetailsService().setEnableAuthorities(false);*/
+        auth.authenticationProvider(authenticationProvider());
+        /*auth.inMemoryAuthentication()
+                .withUser("user")
+                .password(passwordEncoder().encode("secret"))
+                .roles("USER");
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password(passwordEncoder().encode("secret"))
+                .roles("ADMIN");*/
     }
 }

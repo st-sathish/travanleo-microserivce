@@ -6,11 +6,12 @@ create table if not exists users(
     PRIMARY KEY (id)
 )ENGINE=InnoDB CHARACTER SET=utf8;
 
--- original password john@123 and kelly@123 --
+-- original password john@123 and kelly@123
+-- $2a$10$F2dXfNuFjqezxIZp0ad5OeegW43cRdSiPgEtcetHspiNrUCi3iI6O  originalPassword=secret
 INSERT INTO users (username, password, enabled)
-    VALUES ('john', '$2a$04$xqJH/AWpC89pBBFb7i9VU.zoWbOrE2gvdFcfTAOE1bCF5.tNvVXXu', 1);
+    VALUES ('john', '$2a$10$F2dXfNuFjqezxIZp0ad5OeegW43cRdSiPgEtcetHspiNrUCi3iI6O', 1);
 INSERT INTO users (username, password, enabled)
-    VALUES ('kelly','$2a$04$IpZnGqXXgNvvMbqlg/tc7uJUM.1nj/5KtqnFlxRpRN2RqWUFV4lg6', 1);
+    VALUES ('kelly','$2a$10$F2dXfNuFjqezxIZp0ad5OeegW43cRdSiPgEtcetHspiNrUCi3iI6O', 1);
 
 
 CREATE TABLE if not exists `roles` (

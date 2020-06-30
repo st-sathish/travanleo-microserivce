@@ -8,6 +8,8 @@ import com.travanleo.user.data.UserData;
 import com.travanleo.user.service.UserReadPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Consumes;
@@ -24,6 +26,7 @@ import javax.ws.rs.core.Response;
 @Path("/users")
 @Component
 @Scope("singleton")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UserApiResource {
 
     private final UserReadPlatformService userReadPlatformService;
@@ -38,6 +41,8 @@ public class UserApiResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @PreAuthorize("hasRole('ROLE_USER')" +
+    "&& hasRole('ROLE_ADMIN')")
     public Response getUsers() {
         UserData userData = new UserData();
         userData.setName("Hello Sathish");

@@ -11,7 +11,7 @@ INSERT INTO
 VALUES
   (
     'appclient',
-    '$2a$04$ZVENvHhtvDKPSgMsP9AK0usr9o3Dpo2G3aSAT1HQZSZUB7CoAP6QC',
+    '$2a$10$F2dXfNuFjqezxIZp0ad5OeegW43cRdSiPgEtcetHspiNrUCi3iI6O',
     'userService',
     'read,write',
     'authorization_code,check_token,refresh_token,password',

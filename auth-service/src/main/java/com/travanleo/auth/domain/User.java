@@ -13,12 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "User")
 @Table(name = "users")
-public class User extends AbstractPersistableCustom {
+public class User extends AbstractPersistableCustom implements Serializable {
 
     @Column(name = "username", nullable = false)
     private String username;
