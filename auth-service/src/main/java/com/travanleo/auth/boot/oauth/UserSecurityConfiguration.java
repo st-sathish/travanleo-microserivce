@@ -20,8 +20,8 @@ import javax.sql.DataSource;
 @Configuration
 public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    //@Autowired
-    //private DataSource ds;
+    @Autowired
+    private DataSource ds;
 
     @Override
     @Bean
@@ -51,11 +51,11 @@ public class UserSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // BCryptPasswordEncoder(4) is used for users.password column
-        /*JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
-                .passwordEncoder(userPasswordEncoder())
+        JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
+                .passwordEncoder(passwordEncoder())
                 .dataSource(ds);
         cfg.getUserDetailsService().setEnableGroups(false);
-        cfg.getUserDetailsService().setEnableAuthorities(false);*/
-        auth.authenticationProvider(authenticationProvider());
+        cfg.getUserDetailsService().setEnableAuthorities(false);
+        //auth.authenticationProvider(authenticationProvider());
     }
 }

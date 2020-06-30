@@ -1,3 +1,4 @@
+-- CREATE DATABASE travanleo_auth CHARACTER SET utf8 COLLATE utf8_general_ci;
 create table if not exists oauth_client_details (
     client_id varchar(256) primary key,
     resource_ids varchar(256),
@@ -10,7 +11,7 @@ create table if not exists oauth_client_details (
     refresh_token_validity integer,
     additional_information varchar(4096),
     autoapprove varchar(256)
-);
+) ENGINE=InnoDB CHARACTER SET=utf8;
 
 create table if not exists oauth_access_token(
   token_id VARCHAR(256),
@@ -20,10 +21,10 @@ create table if not exists oauth_access_token(
   client_id VARCHAR(256),
   authentication BLOB,
   refresh_token VARCHAR(256)
-);
+) ENGINE=InnoDB CHARACTER SET=utf8;
 
 create table if not exists oauth_refresh_token (
   token_id VARCHAR(256),
   token BLOB,
   authentication BLOB
-);
+) ENGINE=InnoDB CHARACTER SET=utf8;

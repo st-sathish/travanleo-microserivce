@@ -10,8 +10,8 @@ INSERT INTO
   )
 VALUES
   (
-    'appUserServiceClient',
-    '$2a$04$5NamgB.8FdmT.ie6J0MyuuRPVltEJmaUYVaWbBUraAbLvNiMZtL1G',
+    'appUserClient',
+    '$2a$04$skVqhOtxYuZ37NNcM/1LAOIV/skAn/sEe9bNKMztn4k8AXlS5ksrG',
     'userService',
     'read,write',
     'authorization_code,check_token,refresh_token,password',
@@ -24,8 +24,8 @@ INSERT INTO oauth_client_details (client_id, client_secret, resource_ids, scope,
     refresh_token_validity)
 VALUES
   (
-    'appCommentServiceClient',
-    '$2a$04$7Krkeyuar098iCfrRebmY.92zYTK6FGx4.VRlHOHQBt3IsRDamZqa',
+    'appCommentClient',
+    '$2a$04$lH8jU7Hy4ew/eS69hnQWLOxqdAjWiC0LMraYnPosVfwCkmM6xdQqC',
     'commentService',
     'read,write',
     'authorization_code,check_token,refresh_token,password',

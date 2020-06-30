@@ -1,5 +1,7 @@
 package com.travanleo.auth.domain;
 
+import com.travanleo.core.domain.AbstractPersistableCustom;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,12 +18,7 @@ import java.util.Set;
 
 @Entity(name = "User")
 @Table(name = "users")
-public class User {
-
-    @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends AbstractPersistableCustom {
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -48,14 +45,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.enabled = true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
