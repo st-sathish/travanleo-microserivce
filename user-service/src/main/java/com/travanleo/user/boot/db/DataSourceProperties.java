@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 // only explicitly declared in DataSourceConfiguration (if that's active)
 public class DataSourceProperties extends PoolProperties {
 
-    private int port = 3306;
+    private String port = "3306";
 
     private String hostname = "localhost";
 
@@ -24,7 +24,7 @@ public class DataSourceProperties extends PoolProperties {
 
     private String jdbcSubprotocol = "mysql";
 
-    public DataSourceProperties(String driverClassName, String protocol, String subProtocol, Integer port) {
+    public DataSourceProperties(String driverClassName, String protocol, String subProtocol, String port) {
         super();
         setDriverClassName(driverClassName);
         this.jdbcProtocol = protocol ;
@@ -67,7 +67,7 @@ public class DataSourceProperties extends PoolProperties {
 		return hostname;
 	}
 
-	public int getPort() {
+	public String getPort() {
 		return port;
 	}
 
@@ -75,7 +75,7 @@ public class DataSourceProperties extends PoolProperties {
 		return dbName;
 	}
 
-	public void setPort(int port) {
+	public void setPort(String port) {
 		this.port = port;
 	}
 

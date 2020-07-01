@@ -22,6 +22,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/users")
 @Component
@@ -43,9 +44,8 @@ public class UserApiResource {
     @Produces(MediaType.APPLICATION_JSON)
     @PreAuthorize("hasAuthority('USER')")
     public Response getUsers() {
-        UserData userData = new UserData();
-        userData.setName("Hello Sathish");
-        return Response.ok().entity(userData).build();
+        List<UserData> userDataList = userReadPlatformService.retrieveAll();
+        return Response.ok().entity(userDataList).build();
     }
 
     @POST

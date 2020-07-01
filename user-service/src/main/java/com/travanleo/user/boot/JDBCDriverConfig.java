@@ -18,7 +18,7 @@ public class JDBCDriverConfig {
 	private String driverClassName ;
 	private String protocol ;
 	private String subProtocol ;
-	private Integer port ;
+	private String port ;
 	
 	@Autowired
 	ApplicationContext context ;
@@ -29,7 +29,7 @@ public class JDBCDriverConfig {
 		driverClassName = (String)environment.getProperty(DRIVER_CLASS_PROPERTY_NAME) ;
 		protocol = (String) environment.getProperty(PROTOCOL_PROPERTY_NAME) ;
 		subProtocol = (String) environment.getProperty(SUBPROTOCOL_PROPERTY_NAME) ;
-		port = Integer.parseInt((String) environment.getProperty(PORT_PROPERTY_NAME)) ;
+		port = (String) environment.getProperty(PORT_PROPERTY_NAME) ;
 	}
 	
     public String getDriverClassName() {
@@ -44,7 +44,7 @@ public class JDBCDriverConfig {
     	return this.subProtocol ;
     }
     
-    public Integer getPort() {
+    public String getPort() {
     	return this.port ;
     }
     
