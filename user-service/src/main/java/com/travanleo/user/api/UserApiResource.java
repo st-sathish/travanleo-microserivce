@@ -65,6 +65,7 @@ public class UserApiResource {
     @Path("{userId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Response updateUser(@PathParam("userId") final Long userId, final String apiRequestBodyAsJson) {
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .updateUser(userId)
@@ -78,6 +79,7 @@ public class UserApiResource {
     @Path("{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Response removeUser(@PathParam("userId") final Long userId) {
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .deleteUser(userId)
