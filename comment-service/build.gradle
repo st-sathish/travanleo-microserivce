@@ -58,7 +58,8 @@ dependencies {
             [group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'],
             [group: 'joda-time', name: 'joda-time', version: '2.4'],
             [group: 'com.sun.jersey', name: 'jersey-servlet', version: jerseyVersion],
-            [group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final']
+            [group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'],
+            [group: 'org.springframework.cloud', name:'spring-cloud-starter-oauth2', version: '2.1.2.RELEASE']
     )
 }
 
