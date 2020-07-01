@@ -22,7 +22,6 @@ public class CreateCommentCommandHandler implements CommandSourceHandler {
     }
 
     @Override
-    @Transactional
     public CommandProcessingResult processCommand(JsonCommand command) {
         return commentWritePlatformService.create(command);
     }

@@ -22,4 +22,5 @@
     <!-- enable mongodb repository -->
     <mongo:repositories base-package="com.travanleo.comment.commands.domain,
                         com.travanleo.comment.domain" />
+    <import resource="infrastructure.xml" />
 </beans>

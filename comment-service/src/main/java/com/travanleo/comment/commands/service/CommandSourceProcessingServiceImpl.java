@@ -9,6 +9,7 @@ import com.travanleo.comment.commands.provider.CommandHandlerProvider;
 import com.travanleo.comment.data.CommandProcessingResult;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class CommandSourceProcessingServiceImpl implements CommandSourceProcessi
             commandSource = commandSourceOptional.get();
             commandSource.markAsChecked(DateTime.now());
         } else {
-            commandSource = CommandSource.fullEntryFrom(wrapper, command, 1L);
+            commandSource = CommandSource.fullEntryFrom(wrapper, command, command.getUserId());
         }
         commandSource.updateResourceId(result.getResourceId());
         if (commandSource.hasJson()) {

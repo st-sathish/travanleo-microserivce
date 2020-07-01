@@ -6,6 +6,7 @@ import com.travanleo.comment.commands.data.CommandWrapper;
 import com.travanleo.comment.data.CommandProcessingResult;
 import com.travanleo.core.serialization.FromJsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,13 +28,18 @@ public class CommandSourceWritePlatformServiceImpl implements CommandSourceWrite
         final String json = commandWrapper.getJson();
         CommandProcessingResult result = null;
         JsonCommand command = null;
+        final String userName = (String) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
         final JsonElement parsedCommand = this.fromApiJsonHelper.parse(json);
         command = JsonCommand.from(json, parsedCommand, this.fromApiJsonHelper,
                 commandWrapper.getEntityName(), commandWrapper.getEntityId(),
-                commandWrapper.getCommentId(), commandWrapper.getHref());
+                userName, commandWrapper.getHref());
         try {
             result = this.commandSourceProcessingService.processAndLogCommand(commandWrapper, command);
         } catch (Exception e) {
+            e.printStackTrace();
             return CommandProcessingResult.empty();
         }
         return result;

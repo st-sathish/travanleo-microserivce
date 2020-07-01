@@ -12,14 +12,15 @@ public class Comment {
     private String title;
     private String description;
     private DateTime createdAt;
-    private Long createdBy;
+    private String createdBy;
 
     public Comment() {}
 
-    public Comment(final String title, final String description) {
+    public Comment(final String title, final String description, final String createdBy) {
         this.title = title;
         this.description = description;
         this.createdAt = DateTime.now();
+        this.createdBy = createdBy;
     }
 
     public String getId() {
@@ -54,11 +55,11 @@ public class Comment {
         this.createdAt = createdAt;
     }
 
-    public Long getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 }

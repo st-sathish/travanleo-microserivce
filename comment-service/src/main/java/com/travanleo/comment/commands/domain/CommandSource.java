@@ -23,7 +23,7 @@ public class CommandSource {
     private String entityName;
 
     @Field(name = "user_id")
-    private Long userId;
+    private String userId;
 
     @Field(name = "api_get_url")
     private String resourceGetUrl;
@@ -43,7 +43,7 @@ public class CommandSource {
     @Field(name = "checked_on_date")
     private Date checkedOnDate;
 
-    public static CommandSource fullEntryFrom(final CommandWrapper wrapper, final JsonCommand command, final Long userId) {
+    public static CommandSource fullEntryFrom(final CommandWrapper wrapper, final JsonCommand command, final String userId) {
         return new CommandSource(wrapper.getActionName(), wrapper.getEntityName(), wrapper.getHref(), command.entityId(),
                 userId, command.json(), DateTime.now());
     }
@@ -53,7 +53,7 @@ public class CommandSource {
     }
 
     private CommandSource(final String actionName, final String entityName, final String href, final String resourceId,
-                          final Long userId, final String commandSerializedAsJson, final DateTime madeOnDateTime) {
+                          final String userId, final String commandSerializedAsJson, final DateTime madeOnDateTime) {
         this.actionName = actionName;
         this.entityName = entityName;
         this.resourceGetUrl = href;
@@ -110,7 +110,7 @@ public class CommandSource {
         return this.resourceId;
     }
 
-    public void updateForAudit(final Long userId, final String transactionId) {
+    public void updateForAudit(final String userId, final String transactionId) {
         this.userId = userId;
     }
 
@@ -118,7 +118,7 @@ public class CommandSource {
         return this.resourceGetUrl;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return this.userId;
     }
 }

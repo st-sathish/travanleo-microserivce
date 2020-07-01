@@ -21,7 +21,6 @@ public class DeleteCommentCommandHandler implements CommandSourceHandler {
     }
 
     @Override
-    @Transactional
     public CommandProcessingResult processCommand(JsonCommand command) {
         return null;
     }

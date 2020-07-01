@@ -38,7 +38,7 @@ public class CommentWritePlatformServiceImpl implements CommentWritePlatformServ
             String description = command.stringValueOfParameterNamed(CommentApiConstants.descriptionParamName);
 
             // save Comment
-            Comment comment = new Comment(title, description);
+            Comment comment = new Comment(title, description, command.getUserId());
             commentRepository.save(comment);
 
             result = new CommandProcessingResultBuilder()

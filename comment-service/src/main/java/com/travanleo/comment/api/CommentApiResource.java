@@ -42,10 +42,6 @@ public class CommentApiResource {
     @PreAuthorize("hasAuthority('USER')")
     @SuppressWarnings("unchecked")
     public Response createComment(final String apiRequestBodyAsJson) {
-        final Map<String, Object> user = (Map<String, Object>) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .createComment()
                 .withJson(apiRequestBodyAsJson)

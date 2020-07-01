@@ -1,5 +1,6 @@
 package com.travanleo.comment.boot.db;
 
+import com.mongodb.ClientSessionOptions;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
@@ -12,8 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 import java.util.Collections;
 
@@ -34,6 +38,11 @@ public class DataSourceConfiguration extends AbstractMongoClientConfiguration {
     }
 
     @Bean
+    public MongoDatabaseFactory mongoDbFactory() {
+        return new SimpleMongoClientDatabaseFactory(mongoClient(), getDatabaseName());
+    }
+
+    @Bean
     @Override
     public MongoClient mongoClient() {
         /**
@@ -49,7 +58,8 @@ public class DataSourceConfiguration extends AbstractMongoClientConfiguration {
 //                .applyToClusterSettings(builder ->
 //                        builder.hosts(Collections.singletonList(new ServerAddress(dataSourceProperties.getHost(), dataSourceProperties.getPort()))))
 //                .build();
-        final MongoClient client = MongoClients.create(new ConnectionString(config.getSubProtocol()+"://"+dataSourceProperties.getHost()));
+        final String connection = config.getSubProtocol()+"://"+dataSourceProperties.getHost();
+        final MongoClient client = MongoClients.create(new ConnectionString(connection));
         logger.info("Created New DataSource {}", client.getClusterDescription().toString());
         return client;
     }
