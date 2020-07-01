@@ -44,7 +44,8 @@ public class ClientAuthorizationConfiguration extends AuthorizationServerConfigu
     @Override
     public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
         // This will enable /oauth/check_token access
-        cfg.checkTokenAccess("isAuthenticated()");
+        cfg.checkTokenAccess("permitAll()")
+                .tokenKeyAccess("permitAll()");
         // BCryptPasswordEncoder() is used for oauth_client_details.user_secret
         cfg.passwordEncoder(passwordEncoder);
     }
