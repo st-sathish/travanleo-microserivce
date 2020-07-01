@@ -23,10 +23,10 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_12
 targetCompatibility = JavaVersion.VERSION_12
 
+project.ext.springBootVersion = '2.3.1.RELEASE'
 project.ext.springVersion = '4.0.7.RELEASE'
 project.ext.springOauthVersion = '2.0.4.RELEASE'
 project.ext.jerseyVersion = '1.17'
-project.ext.springDataJpaVersion = '1.7.0.RELEASE'
 
 configurations {
     providedCompile
@@ -61,9 +61,11 @@ dependencies {
             [group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'],
             [group: 'joda-time', name: 'joda-time', version: '2.4'],
             [group: 'com.sun.jersey', name: 'jersey-servlet', version: jerseyVersion],
+            [group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '7.0.54'],
             [group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'],
-            [group: 'org.springframework.cloud', name:'spring-cloud-starter-oauth2', version: '2.1.2.RELEASE']
+            [group: 'org.springframework.cloud', name:'spring-cloud-starter-oauth2', version: '2.2.2.RELEASE'],
     )
+    compile group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.2'
 }
 
 springBoot {
