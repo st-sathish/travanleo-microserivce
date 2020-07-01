@@ -50,10 +50,10 @@ public class UserAuthorizationConfiguration extends WebSecurityConfigurerAdapter
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // BCryptPasswordEncoder(4) is used for users.password column
-        /*JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
-                .passwordEncoder(passwordEncoder())
-                .dataSource(ds);*/
+        // BCryptPasswordEncoder() is used for users.password column
+//        JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
+//                .passwordEncoder(passwordEncoder())
+//                .dataSource(ds);
         /*cfg.getUserDetailsService().setEnableGroups(false);
         cfg.getUserDetailsService().setEnableAuthorities(false);*/
         auth.authenticationProvider(authenticationProvider());
