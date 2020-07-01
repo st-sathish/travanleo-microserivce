@@ -41,7 +41,7 @@ public class UserApiResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('USER')")
     public Response getUsers() {
         UserData userData = new UserData();
         userData.setName("Hello Sathish");
@@ -51,7 +51,7 @@ public class UserApiResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Response createUser(final String apiRequestBodyAsJson) {
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .createUser()
