@@ -46,8 +46,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile project(':core')
+    compile(project(':core')) {
+        transitive = false
+    }
     compile(
+            [group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.1.RELEASE'],
             [group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '2.3.1.RELEASE'],
             [group: 'javax.ws.rs', name: 'jsr311-api', version: '1.1.1'],
             [group: 'com.sun.jersey', name: 'jersey-core', version: jerseyVersion],

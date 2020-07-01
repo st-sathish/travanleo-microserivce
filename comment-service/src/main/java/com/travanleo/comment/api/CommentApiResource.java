@@ -34,6 +34,7 @@ public class CommentApiResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public Response createComment(final String apiRequestBodyAsJson) {
         final CommandWrapper commandWrapper = new CommandWrapperBuilder()
                 .createComment()

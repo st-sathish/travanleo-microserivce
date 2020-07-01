@@ -4,10 +4,10 @@ import com.travanleo.comment.commands.data.CommandWrapper;
 
 public class CommandWrapperBuilder {
 
-    private Long commentId;
+    private String commentId;
     private String actionName;
     private String entityName;
-    private Long entityId;
+    private String entityId;
     private String href;
     private String json = "{}";
 
@@ -20,7 +20,7 @@ public class CommandWrapperBuilder {
         this.actionName = "CREATE";
         this.entityName = "COMMENT";
         this.entityId = null;
-        this.href = "/comments/template";
+        this.href = "/comments";
         return this;
     }
 

@@ -2,20 +2,20 @@ package com.travanleo.comment.commands.data;
 
 public class CommandWrapper {
 
-    private final Long commandId;
-    private final Long commentId;
+    private final String commandId;
+    private final String commentId;
     private final String actionName;
     private final String entityName;
-    private final Long entityId;
+    private final String entityId;
     private final String href;
     private final String json;
 
     @SuppressWarnings("unused")
     private Long templateId;
 
-    public CommandWrapper(final String actionName, final String entityName, final Long resourceId,
+    public CommandWrapper(final String actionName, final String entityName, final String resourceId,
                           final String resourceGetUrl,
-                          final Long commentId) {
+                          final String commentId) {
 
         this.commandId = null;
         this.commentId = commentId;
@@ -26,8 +26,8 @@ public class CommandWrapper {
         this.json = null;
     }
 
-    public CommandWrapper(final Long commentId, final String actionName, final String entityName,
-                          final Long resourceId,final String resourceGetUrl, String json) {
+    public CommandWrapper(final String commentId, final String actionName, final String entityName,
+                          final String resourceId,final String resourceGetUrl, String json) {
 
         this.commandId = null;
         this.commentId = commentId;
@@ -50,11 +50,11 @@ public class CommandWrapper {
         return this.entityName;
     }
 
-    public Long getEntityId() {
+    public String getEntityId() {
         return this.entityId;
     }
 
-    public Long getCommentId() {
+    public String getCommentId() {
         return this.commentId;
     }
 
@@ -62,7 +62,7 @@ public class CommandWrapper {
         return this.actionName;
     }
 
-    public Long getCommandId() {
+    public String getCommandId() {
         return this.commandId;
     }
 }
