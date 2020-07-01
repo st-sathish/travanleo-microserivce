@@ -69,7 +69,8 @@ dependencies {
             [group: 'com.sun.jersey', name: 'jersey-servlet', version: jerseyVersion],
             [group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: tomcatVersion],
             [group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'],
-            [group: 'org.springframework.cloud', name:'spring-cloud-starter-oauth2', version: '2.1.2.RELEASE']
+            [group: 'org.springframework.cloud', name:'spring-cloud-starter-oauth2', version: '2.1.2.RELEASE'],
+            [group: 'org.flywaydb', name: 'flyway-core', version: '6.5.0']
     )
     driver 'mysql:mysql-connector-java:5.1.27'
 }
