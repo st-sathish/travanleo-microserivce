@@ -28,14 +28,10 @@ public class CommandSourceWritePlatformServiceImpl implements CommandSourceWrite
         final String json = commandWrapper.getJson();
         CommandProcessingResult result = null;
         JsonCommand command = null;
-        final String userName = (String) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
         final JsonElement parsedCommand = this.fromApiJsonHelper.parse(json);
         command = JsonCommand.from(json, parsedCommand, this.fromApiJsonHelper,
                 commandWrapper.getEntityName(), commandWrapper.getEntityId(),
-                userName, commandWrapper.getHref());
+                commandWrapper.getCommentId(), commandWrapper.getHref());
         try {
             result = this.commandSourceProcessingService.processAndLogCommand(commandWrapper, command);
         } catch (Exception e) {

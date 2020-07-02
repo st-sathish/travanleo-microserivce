@@ -22,8 +22,8 @@ public class CommandSource {
     @Field(name = "entity_name")
     private String entityName;
 
-    @Field(name = "user_id")
-    private String userId;
+    @Field(name = "comment_id")
+    private String commentId;
 
     @Field(name = "api_get_url")
     private String resourceGetUrl;
@@ -43,9 +43,9 @@ public class CommandSource {
     @Field(name = "checked_on_date")
     private Date checkedOnDate;
 
-    public static CommandSource fullEntryFrom(final CommandWrapper wrapper, final JsonCommand command, final String userId) {
+    public static CommandSource fullEntryFrom(final CommandWrapper wrapper, final JsonCommand command, final String commentId) {
         return new CommandSource(wrapper.getActionName(), wrapper.getEntityName(), wrapper.getHref(), command.entityId(),
-                userId, command.json(), DateTime.now());
+                commentId, command.json(), DateTime.now());
     }
 
     protected CommandSource() {
@@ -53,13 +53,13 @@ public class CommandSource {
     }
 
     private CommandSource(final String actionName, final String entityName, final String href, final String resourceId,
-                          final String userId, final String commandSerializedAsJson, final DateTime madeOnDateTime) {
+                          final String commentId, final String commandSerializedAsJson, final DateTime madeOnDateTime) {
         this.actionName = actionName;
         this.entityName = entityName;
         this.resourceGetUrl = href;
         this.resourceId = resourceId;
         this.commandAsJson = commandSerializedAsJson;
-        this.userId = userId;
+        this.commentId = commentId;
         this.createdOnDate = madeOnDateTime.toDate();
         this.processingResult = CommandProcessingResultType.PROCESSED.getValue();
     }
@@ -110,15 +110,11 @@ public class CommandSource {
         return this.resourceId;
     }
 
-    public void updateForAudit(final String userId, final String transactionId) {
-        this.userId = userId;
-    }
-
     public String getResourceGetUrl() {
         return this.resourceGetUrl;
     }
 
-    public String getUserId() {
-        return this.userId;
+    public String getCommentId() {
+        return this.commentId;
     }
 }

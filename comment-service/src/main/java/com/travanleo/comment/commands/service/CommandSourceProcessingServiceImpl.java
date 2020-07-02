@@ -38,7 +38,7 @@ public class CommandSourceProcessingServiceImpl implements CommandSourceProcessi
             commandSource = commandSourceOptional.get();
             commandSource.markAsChecked(DateTime.now());
         } else {
-            commandSource = CommandSource.fullEntryFrom(wrapper, command, command.getUserId());
+            commandSource = CommandSource.fullEntryFrom(wrapper, command, command.getCommentId());
         }
         commandSource.updateResourceId(result.getResourceId());
         if (commandSource.hasJson()) {

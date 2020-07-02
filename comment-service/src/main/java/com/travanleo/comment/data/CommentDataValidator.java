@@ -18,4 +18,8 @@ public class CommentDataValidator {
     public void validateCreateComment(final String command) {
        final JsonElement jsonElement = fromApiJsonHelper.parse(command);
     }
+
+    public void validateUpdateComment(final String command) {
+        final JsonElement jsonElement = fromApiJsonHelper.parse(command);
+    }
 }

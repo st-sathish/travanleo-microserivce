@@ -11,7 +11,7 @@ public class CommandProcessingResultBuilder {
     private String commandId;
     private String resourceIdentifier;
     private String entityId;
-    private Long userId;
+    private String commentId;
     private Map<String, Object> changes;
 
     public CommandProcessingResult build() {
@@ -34,8 +34,8 @@ public class CommandProcessingResultBuilder {
         return this;
     }
 
-    public CommandProcessingResultBuilder withUserId(final Long withUserId) {
-        this.userId = withUserId;
+    public CommandProcessingResultBuilder withCommentId(final String withCommentId) {
+        this.commentId = withCommentId;
         return this;
     }
 

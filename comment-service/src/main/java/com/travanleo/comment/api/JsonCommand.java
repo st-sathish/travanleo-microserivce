@@ -17,7 +17,7 @@ public final class JsonCommand {
     private final FromJsonHelper fromApiJsonHelper;
     private final String commandId;
     private final String resourceId;
-    private final String userId;
+    private final String commentId;
     private final String entityName;
     private final String url;
 
@@ -30,16 +30,16 @@ public final class JsonCommand {
 
     public static JsonCommand fromExistingCommand(final String commandId, final String jsonCommand, final JsonElement parsedCommand,
                                                   final FromJsonHelper fromApiJsonHelper, final String entityName, final String resourceId,
-                                                  final String userId, final String url) {
+                                                  final String commentId, final String url) {
         return new JsonCommand(commandId, jsonCommand, parsedCommand, fromApiJsonHelper, entityName, resourceId,
-                userId, url);
+                commentId, url);
 
     }
 
     public static JsonCommand fromExistingCommand(JsonCommand command, final JsonElement parsedCommand) {
         final String jsonCommand = command.fromApiJsonHelper.toJson(parsedCommand);
         return new JsonCommand(command.commandId, jsonCommand, parsedCommand, command.fromApiJsonHelper, command.entityName,
-                command.resourceId, command.userId, command.url);
+                command.resourceId, command.commentId, command.url);
     }
 
     private boolean differenceExists(final String baseValue, final String workingCopyValue) {
@@ -62,7 +62,7 @@ public final class JsonCommand {
     }
 
     public JsonCommand(final String commandId, final String jsonCommand, final JsonElement parsedCommand,
-                       final FromJsonHelper fromApiJsonHelper, final String entityName, final String resourceId, final String userId, final String url) {
+                       final FromJsonHelper fromApiJsonHelper, final String entityName, final String resourceId, final String commentId, final String url) {
 
         this.commandId = commandId;
         this.jsonCommand = jsonCommand;
@@ -70,7 +70,7 @@ public final class JsonCommand {
         this.fromApiJsonHelper = fromApiJsonHelper;
         this.entityName = entityName;
         this.resourceId = resourceId;
-        this.userId = userId;
+        this.commentId = commentId;
         this.url = url;
     }
     
@@ -85,7 +85,7 @@ public final class JsonCommand {
         this.jsonCommand = null;        
         this.fromApiJsonHelper = null;
         this.entityName = null;
-        this.userId = null;
+        this.commentId = null;
         this.url = null;
     }
 
@@ -125,8 +125,8 @@ public final class JsonCommand {
         return this.resourceId;
     }
 
-    public String getUserId() {
-        return this.userId;
+    public String getCommentId() {
+        return this.commentId;
     }
 
     public String getUrl() {

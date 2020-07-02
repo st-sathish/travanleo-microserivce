@@ -22,6 +22,6 @@ public class DeleteCommentCommandHandler implements CommandSourceHandler {
 
     @Override
     public CommandProcessingResult processCommand(JsonCommand command) {
-        return null;
+        return commentWritePlatformService.delete(command.getCommentId(), command);
     }
 }

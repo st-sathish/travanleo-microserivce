@@ -24,6 +24,25 @@ public class CommandWrapperBuilder {
         return this;
     }
 
+    public CommandWrapperBuilder updateComment(final String commentId) {
+        this.actionName = "UPDATE";
+        this.entityName = "COMMENT";
+        this.entityId = commentId;
+        this.commentId = commentId;
+        this.href = "/comments/" + commentId;
+        return this;
+    }
+
+    public CommandWrapperBuilder deleteComment(final String commentId) {
+        this.actionName = "DELETE";
+        this.entityName = "COMMENT";
+        this.entityId = commentId;
+        this.commentId = commentId;
+        this.href = "/comments/" + commentId;
+        this.json = "{}";
+        return this;
+    }
+
     public CommandWrapperBuilder withJson(final String withJson) {
         this.json = withJson;
         return this;
