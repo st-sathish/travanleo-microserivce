@@ -74,6 +74,7 @@ public class CommentWritePlatformServiceImpl implements CommentWritePlatformServ
                 comment.updateDescription(description);
             }
             if (!changes.isEmpty()) {
+                comment.setUpdatedAt(DateTime.now());
                 this.commentRepository.save(comment);
             }
             return new CommandProcessingResultBuilder()

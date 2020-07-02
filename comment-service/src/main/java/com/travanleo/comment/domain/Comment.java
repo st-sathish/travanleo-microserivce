@@ -96,4 +96,12 @@ public class Comment {
         }
         return actualChanges;
     }
+
+    public DateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(DateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

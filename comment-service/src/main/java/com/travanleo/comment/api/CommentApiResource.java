@@ -4,6 +4,7 @@ import com.travanleo.comment.commands.data.CommandWrapper;
 import com.travanleo.comment.commands.service.CommandSourceWritePlatformService;
 import com.travanleo.comment.commands.service.CommandWrapperBuilder;
 import com.travanleo.comment.data.CommandProcessingResult;
+import com.travanleo.comment.data.CommentData;
 import com.travanleo.comment.service.CommentReadPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -21,7 +23,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Map;
+import java.util.List;
 
 @Path("/comments")
 @Scope("singleton")
@@ -37,6 +39,14 @@ public class CommentApiResource {
                               final CommandSourceWritePlatformService commandSourceWritePlatformService) {
         this.commentReadPlatformService = commentReadPlatformService;
         this.commandSourceWritePlatformService = commandSourceWritePlatformService;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @PreAuthorize("hasAuthority('USER')")
+    public Response getMyComments() {
+        List<CommentData> commentDataList = commentReadPlatformService.retrieveMyCommentList();
+        return Response.ok().entity(commentDataList).build();
     }
 
     @POST
